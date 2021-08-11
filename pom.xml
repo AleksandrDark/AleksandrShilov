@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.epam.tc.hw1</groupId>
+    <groupId>com.epam.tc</groupId>
     <artifactId>training-project</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -19,6 +19,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.puppycrawl.tools</groupId>
+            <artifactId>checkstyle</artifactId>
+            <version>8.30</version>
+        </dependency>
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
@@ -44,6 +49,31 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.1.2</version>
+                <configuration>
+                    <configLocation>
+                        <!--  pay attention to use exact url for checkstyle plugin ruleset  -->
+                        https://raw.githubusercontent.com/DmitryKhodakovsky/epam-training-center-code-checkers-configurations/main/checkstyle/checkstyle.xml
+                    </configLocation>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                    <consoleOutput>true</consoleOutput>
+                    <failsOnError>true</failsOnError>
+                    <linkXRef>false</linkXRef>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>validate</id>
+                        <phase>none</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M5</version>
                 <configuration>
@@ -54,9 +84,10 @@
             </plugin>
         </plugins>
     </build>
+
     <profiles>
         <profile>
-            <id>hw1-first-calculator-profile</id>
+            <id>add-sub-tests-start-profile</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -65,16 +96,17 @@
             </properties>
         </profile>
         <profile>
-            <id>hw1-second-calculator-profile</id>
+            <id>div-mult-tests-start-profile</id>
             <properties>
                 <maven-surefire-plugin.suiteXmlFile>${project.build.testOutputDirectory}/testng/hw1.secondDivMult.xml</maven-surefire-plugin.suiteXmlFile>
             </properties>
         </profile>
         <profile>
-            <id>hw1-all-calculator-profile</id>
+            <id>all-tests-start-profile</id>
             <properties>
                 <maven-surefire-plugin.suiteXmlFile>${project.build.testOutputDirectory}/testng/hw1.allTests.xml</maven-surefire-plugin.suiteXmlFile>
             </properties>
         </profile>
     </profiles>
+
 </project>
