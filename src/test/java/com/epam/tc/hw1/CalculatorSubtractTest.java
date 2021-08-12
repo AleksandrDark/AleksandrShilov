@@ -8,14 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 @Test(groups = {"addSub"})
-public class CalculatorSubtractTest {
-
-    private Calculator calculator;
-
-    @BeforeMethod
-    public void initCalculator() {
-        calculator = new Calculator();
-    }
+public class CalculatorSubtractTest extends InitCalculator {
 
     @Test(dataProvider = "setDataSubLong", dataProviderClass = CalculatorDataProviderClass.class)
     public void testSubtractLong(long num1, long num2, long expected) {

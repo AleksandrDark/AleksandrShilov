@@ -8,14 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 @Test(groups = {"multDiv"})
-public class CalculatorMultiplyTest {
-
-    private Calculator calculator;
-
-    @BeforeMethod
-    public void initCalculator() {
-        calculator = new Calculator();
-    }
+public class CalculatorMultiplyTest extends InitCalculator {
 
     @Test(dataProvider = "dataSetMultLong", dataProviderClass = CalculatorDataProviderClass.class)
     public void testMultiply(long num1, long num2, long expected) {
