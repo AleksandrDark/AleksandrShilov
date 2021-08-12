@@ -3,8 +3,6 @@ package com.epam.tc.hw1;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.withPrecision;
 
-import com.epam.tat.module4.Calculator;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 
