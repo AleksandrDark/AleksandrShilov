@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 
 @Test(groups = {"multDiv"})
-public class CalculatorDivideTest extends InitCalculator {
+public class CalculatorDivideTest extends InitBaseCalculator {
 
     @Test(dataProvider = "dataSetDivLong", dataProviderClass = CalculatorDataProviderClass.class)
     public void testDivLong(long num1, long num2, long res) {

@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.withPrecision;
 import org.testng.annotations.Test;
 
 @Test(groups = {"multDiv"})
-public class CalculatorMultiplyTest extends InitCalculator {
+public class CalculatorMultiplyTest extends InitBaseCalculator {
 
     @Test(dataProvider = "dataSetMultLong", dataProviderClass = CalculatorDataProviderClass.class)
     public void testMultiply(long num1, long num2, long expected) {

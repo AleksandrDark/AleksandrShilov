@@ -6,7 +6,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import org.testng.annotations.Test;
 
 @Test(groups = {"addSub"})
-public class CalculatorAddTest extends InitCalculator {
+public class CalculatorAddTest extends InitBaseCalculator {
 
     @Test(dataProvider = "dataSetAddLong", dataProviderClass = CalculatorDataProviderClass.class)
     public void testSumCalculatorLong(long num1, long num2, long expected) {

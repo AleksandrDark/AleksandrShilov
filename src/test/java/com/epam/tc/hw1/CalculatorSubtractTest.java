@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.withPrecision;
 import org.testng.annotations.Test;
 
 @Test(groups = {"addSub"})
-public class CalculatorSubtractTest extends InitCalculator {
+public class CalculatorSubtractTest extends InitBaseCalculator {
 
     @Test(dataProvider = "setDataSubLong", dataProviderClass = CalculatorDataProviderClass.class)
     public void testSubtractLong(long num1, long num2, long expected) {
