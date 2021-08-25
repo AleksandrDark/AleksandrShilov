@@ -1,83 +1,84 @@
 package com.epam.tc.hw2.ex1;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+import com.epam.tc.hw2.WebDriverElement;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 @Test
-public class HomePageTest {
-
-    private WebDriver driver;
-
-    @BeforeMethod
-    public void setupDriver() {
-        WebDriverManager.chromedriver().setup();
-    }
+public class HomePageTest extends WebDriverElement {
 
     @Test
     public void testHomePage() {
-        driver = new ChromeDriver();
+        webDriver = new ChromeDriver();
         SoftAssertions softAssertions = new SoftAssertions();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
+        webDriver.manage().window().maximize();
+        webDriver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
+        //1. open test site url
         String url = "https://jdi-testing.github.io/jdi-light/index.html";
-        driver.navigate().to(url);
-        softAssertions.assertThat(driver.getCurrentUrl()).isEqualTo(url);
-        softAssertions.assertThat(driver.getTitle()).isEqualTo("Home Page");
-        driver.findElement(By.xpath("/html/body/header/div/nav/ul[2]/li/a")).click();
-        driver.findElement(By.xpath("//*[@id=\"name\"]")).sendKeys("Roman");
-        driver.findElement(By.id("password")).sendKeys("Jdi1234");
-        driver.findElement(By.id("login-button")).click();
-        WebElement webElement = driver.findElement(By.xpath("//*[@id='user-name']"));
+        webDriver.navigate().to(url);
+        //2. assert browser title
+        softAssertions.assertThat(webDriver.getCurrentUrl()).isEqualTo(url);
+        softAssertions.assertThat(webDriver.getTitle()).isEqualTo("Home Page");
+        //3. perform login
+        webDriver.findElement(By.cssSelector("a[href='#']")).click();
+        webDriver.findElement(By.id("name")).sendKeys("Roman");
+        webDriver.findElement(By.id("password")).sendKeys("Jdi1234");
+        webDriver.findElement(By.id("login-button")).click();
+        //4. assert username is logged
+        WebElement webElement = webDriver.findElement(By.id("user-name"));
         softAssertions.assertThat(webElement.getText()).isEqualTo("ROMAN IOVLEV");
-        webElement = driver.findElement(By.xpath("/html/body/header/div/nav/ul[1]/li[1]/a"));
-        softAssertions.assertThat(webElement.getText()).isEqualTo("HOME");
-        webElement = driver.findElement(By.xpath("/html/body/header/div/nav/ul[1]/li[2]/a"));
-        softAssertions.assertThat(webElement.getText()).isEqualTo("CONTACT FORM");
-        webElement = driver.findElement(By.xpath("/html/body/header/div/nav/ul[1]/li[3]/a"));
-        softAssertions.assertThat(webElement.getText()).isEqualTo("SERVICE");
-        webElement = driver.findElement(By.xpath("/html/body/header/div/nav/ul[1]/li[4]/a"));
-        softAssertions.assertThat(webElement.getText()).isEqualTo("METALS & COLORS");
-        List<WebElement> imagesOnPage = driver.findElements(By.cssSelector(".benefit-icon"));
-        softAssertions.assertThat(imagesOnPage.size()).isEqualTo(4);
-        List<WebElement> textUnderImages = driver.findElements(By.cssSelector(".benefit-txt"));
-        String firstTextUnderImage = "To include good practices\nand ideas from successful\nEPAM project";
-        softAssertions.assertThat(textUnderImages.get(0).getText()).isEqualTo(firstTextUnderImage);
-        String secondTextUnderImage = "To be flexible and\ncustomizable";
-        softAssertions.assertThat(textUnderImages.get(1).getText()).isEqualTo(secondTextUnderImage);
-        String thirdTextUnderImage = "To be multiplatform";
-        softAssertions.assertThat(textUnderImages.get(2).getText()).isEqualTo(thirdTextUnderImage);
-        String fourthTextUnderImage = "Already have good base\n(about 20 internal and\nsome external projects),"
-            + "\nwish to get more…";
-        softAssertions.assertThat(textUnderImages.get(3).getText()).isEqualTo(fourthTextUnderImage);
-
-        final String windowHandler = driver.getWindowHandle();
-        driver.switchTo().frame("frame");
-        String button = driver.findElement(By.id("frame-button")).getAttribute("value");
+        //5. assert that there are 4 items on the header section are displayed and they have proper texts
+        List<WebElement> elementsOnHeaderSection = webDriver.findElements(By.cssSelector(".m-l8 > li > a"));
+        softAssertions.assertThat(elementsOnHeaderSection).hasSize(4);
+        List<String> actualTextListElements =
+            elementsOnHeaderSection.stream()
+            .map(WebElement::getText)
+            .collect(Collectors.toList());
+        List<String> expectedTextListElements = Arrays.asList("HOME", "CONTACT FORM", "SERVICE", "METALS & COLORS");
+        softAssertions.assertThat(actualTextListElements).isEqualTo(expectedTextListElements);
+        //6. assert that there are 4 images on the Index Page and they are displayed
+        List<WebElement> imagesOnPage = webDriver.findElements(By.cssSelector(".benefit-icon"));
+        softAssertions.assertThat(imagesOnPage).hasSize(4);
+        //7. assert that there are 4 texts on the Index Page under icons and they have proper text
+        List<WebElement> textElementsUnderImages = webDriver.findElements(By.cssSelector(".benefit-txt"));
+        List<String> textListElementsUnderImages =
+                textElementsUnderImages.stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
+        List<String> expectedTextUnderImages =
+                Stream.of("To include good practices\nand ideas from successful\nEPAM project",
+                "To be flexible and\ncustomizable", "To be multiplatform",
+                "Already have good base\n(about 20 internal and\nsome external projects),\nwish to get more…")
+                .collect(Collectors.toList());
+        softAssertions.assertThat(textListElementsUnderImages).isEqualTo(expectedTextUnderImages);
+        final String windowHandler = webDriver.getWindowHandle();
+        //8. assert that there is the iframe with “Frame Button” exist
+        //9. switch to the iframe and check that there is “Frame Button” in the iframe
+        webDriver.switchTo().frame(0);
+        String button = webDriver.findElement(By.id("frame-button")).getAttribute("value");
+        webDriver.findElement(By.id("frame-button")).click();
         softAssertions.assertThat(button).isEqualTo("Frame Button");
-        driver.switchTo().window(windowHandler);
+        //10. switch to original window back
+        webDriver.switchTo().window(windowHandler);
+        //11. assert that there are 5 items in the Left Section are displayed and they have proper text
         List<WebElement> sidebarMenuLeft =
-            driver.findElements(By.xpath("//ul[contains(@class, 'sidebar-menu left')]/li/a"));
-        softAssertions.assertThat(sidebarMenuLeft.size()).isEqualTo(5);
-        softAssertions.assertThat(sidebarMenuLeft.get(0).getText()).isEqualTo("Home");
-        softAssertions.assertThat(sidebarMenuLeft.get(1).getText()).isEqualTo("Contact form");
-        softAssertions.assertThat(sidebarMenuLeft.get(2).getText()).isEqualTo("Service");
-        softAssertions.assertThat(sidebarMenuLeft.get(3).getText()).isEqualTo("Metals & Colors");
-        softAssertions.assertThat(sidebarMenuLeft.get(4).getText()).isEqualTo("Elements packs");
+            webDriver.findElements(By.cssSelector(".uui-side-bar .sidebar-menu > li > a"));
+        softAssertions.assertThat(sidebarMenuLeft).hasSize(5);
+        List<String> textOnSidebarMenuLeft =
+                sidebarMenuLeft.stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
+        List<String> expectedTextOnSidebarMenuLeft = Arrays.asList("Home", "Contact form", "Service",
+            "Metals & Colors", "Elements packs");
+        softAssertions.assertThat(textOnSidebarMenuLeft).isEqualTo(expectedTextOnSidebarMenuLeft);
         softAssertions.assertAll();
     }
-
-    @AfterMethod
-    public void clear() {
-        driver.close();
-    }
-
 }
