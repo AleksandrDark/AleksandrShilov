@@ -3,13 +3,11 @@ package com.epam.tc.hw2.ex1;
 import com.epam.tc.hw2.WebDriverElement;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 
 @Test
@@ -17,10 +15,7 @@ public class HomePageTest extends WebDriverElement {
 
     @Test
     public void testHomePage() {
-        webDriver = new ChromeDriver();
         SoftAssertions softAssertions = new SoftAssertions();
-        webDriver.manage().window().maximize();
-        webDriver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
         //1. open test site url
         String url = "https://jdi-testing.github.io/jdi-light/index.html";
         webDriver.navigate().to(url);
@@ -38,9 +33,7 @@ public class HomePageTest extends WebDriverElement {
         //5. assert that there are 4 items on the header section are displayed and they have proper texts
         List<WebElement> elementsOnHeaderSection = webDriver.findElements(By.cssSelector(".m-l8 > li > a"));
         softAssertions.assertThat(elementsOnHeaderSection).hasSize(4);
-        List<String> actualTextListElements =
-            elementsOnHeaderSection.stream()
-            .map(WebElement::getText)
+        List<String> actualTextListElements = elementsOnHeaderSection.stream().map(WebElement::getText)
             .collect(Collectors.toList());
         List<String> expectedTextListElements = Arrays.asList("HOME", "CONTACT FORM", "SERVICE", "METALS & COLORS");
         softAssertions.assertThat(actualTextListElements).isEqualTo(expectedTextListElements);
@@ -49,9 +42,7 @@ public class HomePageTest extends WebDriverElement {
         softAssertions.assertThat(imagesOnPage).hasSize(4);
         //7. assert that there are 4 texts on the Index Page under icons and they have proper text
         List<WebElement> textElementsUnderImages = webDriver.findElements(By.cssSelector(".benefit-txt"));
-        List<String> textListElementsUnderImages =
-                textElementsUnderImages.stream()
-                .map(WebElement::getText)
+        List<String> textListElementsUnderImages = textElementsUnderImages.stream().map(WebElement::getText)
                 .collect(Collectors.toList());
         List<String> expectedTextUnderImages =
                 Stream.of("To include good practices\nand ideas from successful\nEPAM project",
@@ -61,6 +52,8 @@ public class HomePageTest extends WebDriverElement {
         softAssertions.assertThat(textListElementsUnderImages).isEqualTo(expectedTextUnderImages);
         final String windowHandler = webDriver.getWindowHandle();
         //8. assert that there is the iframe with “Frame Button” exist
+        webElement = webDriver.findElement(By.id("frame"));
+        softAssertions.assertThat(webElement.isDisplayed()).isTrue();
         //9. switch to the iframe and check that there is “Frame Button” in the iframe
         webDriver.switchTo().frame(0);
         String button = webDriver.findElement(By.id("frame-button")).getAttribute("value");
@@ -72,9 +65,7 @@ public class HomePageTest extends WebDriverElement {
         List<WebElement> sidebarMenuLeft =
             webDriver.findElements(By.cssSelector(".uui-side-bar .sidebar-menu > li > a"));
         softAssertions.assertThat(sidebarMenuLeft).hasSize(5);
-        List<String> textOnSidebarMenuLeft =
-                sidebarMenuLeft.stream()
-                .map(WebElement::getText)
+        List<String> textOnSidebarMenuLeft = sidebarMenuLeft.stream().map(WebElement::getText)
                 .collect(Collectors.toList());
         List<String> expectedTextOnSidebarMenuLeft = Arrays.asList("Home", "Contact form", "Service",
             "Metals & Colors", "Elements packs");
