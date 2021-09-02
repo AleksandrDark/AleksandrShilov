@@ -2,7 +2,7 @@ package com.epam.tc.hw2.ex2;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.epam.tc.hw2.WebDriverElement;
+import com.epam.tc.hw2.DriverInit;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
 @Test
-public class DifferentElementsPageTest extends WebDriverElement {
+public class DifferentElementsPageTest extends DriverInit {
 
     @Test
     public void testDifferentElementsOnPage() {
@@ -23,7 +23,7 @@ public class DifferentElementsPageTest extends WebDriverElement {
         //2. Assert Browser title "Home Page"
         assertThat("Home Page").isEqualTo(webDriver.getTitle());
         //3. Perform login
-        webDriver.findElement(By.cssSelector("a[href='#']")).click();
+        webDriver.findElement(By.cssSelector(".uui-profile-menu > a")).click();
         webDriver.findElement(By.id("name")).sendKeys("Roman");
         webDriver.findElement(By.id("password")).sendKeys("Jdi1234");
         webDriver.findElement(By.id("login-button")).click();
