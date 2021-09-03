@@ -17,6 +17,8 @@
         </maven-surefire-plugin.suiteXmlFile>
         <assertj-core.version>3.20.2</assertj-core.version>
         <testng.version>7.4.0</testng.version>
+        <selenium-java.version>3.141.59</selenium-java.version>
+        <webdrivermanager.version>4.4.3</webdrivermanager.version>
     </properties>
 
     <dependencies>
@@ -38,6 +40,17 @@
             <version>1.0</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/src/main/resources/calculator-1.0.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium-java.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>${webdrivermanager.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -110,6 +123,14 @@
             <id>all-tests-start-profile</id>
             <properties>
                 <maven-surefire-plugin.suiteXmlFile>${project.build.testOutputDirectory}/testng/hw1.allTests.xml
+                </maven-surefire-plugin.suiteXmlFile>
+            </properties>
+        </profile>
+        <profile>
+            <id>web-page-test</id>
+            <properties>
+                <maven-surefire-plugin.suiteXmlFile>
+                    ${project.build.testOutputDirectory}/testng/hw2.testWebPage.xml
                 </maven-surefire-plugin.suiteXmlFile>
             </properties>
         </profile>
