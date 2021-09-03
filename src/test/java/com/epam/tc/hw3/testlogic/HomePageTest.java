@@ -50,7 +50,7 @@ public class HomePageTest extends BasePage {
         //8. assert that there is the iframe with “Frame Button” exist
         softAssertions.assertThat(homePage.getFrame().isDisplayed()).isTrue();
         //9. switch to the iframe and check that there is “Frame Button” in the iframe
-        webDriver.switchTo().frame(0);
+        webDriver.switchTo().frame("frame");
         String button = homePage.getFrameButton().getAttribute("value");
         softAssertions.assertThat(homePage.getFrameButton().isDisplayed()).isTrue();
         softAssertions.assertThat(button).isEqualTo("Frame Button");

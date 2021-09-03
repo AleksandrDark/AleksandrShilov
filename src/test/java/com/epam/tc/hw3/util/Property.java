@@ -4,9 +4,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class Property {
+public final class Property {
 
-    public String readProperty(String key) {
+    public static String readProperty(String key) {
         try {
             FileInputStream fis = new FileInputStream("src/test/resources/testdata/user.property");
             Properties properties = new Properties();

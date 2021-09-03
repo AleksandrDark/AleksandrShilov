@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class DifferentElementsPage extends BasePage {
-    @FindBy(xpath = "//li[@class='menu-title']")
+    @FindBy(css = "li.menu-title")
     private WebElement headerMenu;
     @FindBy(linkText = "Different elements")
     private WebElement differentElement;
@@ -19,7 +19,7 @@ public class DifferentElementsPage extends BasePage {
     private WebElement radioSelen;
     @FindBy(xpath = "//select[@class='uui-form-element']")
     private WebElement dropdownYellow;
-    @FindBy(xpath = "//ul[@class='panel-body-list logs']/li")
+    @FindBy(css = ".panel-body-list > li")
     private List<WebElement> logs;
 
     public DifferentElementsPage(WebDriver webDriver) {

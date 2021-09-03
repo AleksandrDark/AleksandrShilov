@@ -7,9 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage extends BasePage {
-    private final Property property = new Property();
 
-    @FindBy(css = "a[href='#']")
+    @FindBy(css = ".uui-profile-menu > a")
     private WebElement userIcon;
     @FindBy(id = "name")
     private WebElement username;
@@ -31,8 +30,8 @@ public class LoginPage extends BasePage {
 
     public void performLogin() {
         userIcon.click();
-        this.username.sendKeys(property.readProperty("username"));
-        this.password.sendKeys(property.readProperty("password"));
+        this.username.sendKeys(Property.readProperty("username"));
+        this.password.sendKeys(Property.readProperty("password"));
         loginButton.click();
     }
 
