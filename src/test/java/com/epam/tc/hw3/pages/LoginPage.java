@@ -30,8 +30,10 @@ public class LoginPage extends BasePage {
 
     public void performLogin() {
         userIcon.click();
-        this.username.sendKeys(Property.readProperty("username"));
-        this.password.sendKeys(Property.readProperty("password"));
+        String username = Property.readProperty("username");
+        String password = Property.readProperty("password");
+        this.username.sendKeys(username);
+        this.password.sendKeys(password);
         loginButton.click();
     }
 
