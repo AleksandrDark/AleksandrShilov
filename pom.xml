@@ -13,12 +13,15 @@
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <maven-surefire-plugin.suiteXmlFile>${project.build.testOutputDirectory}/testng/hw3.testWebPage.xml
-        </maven-surefire-plugin.suiteXmlFile>
+        <testng.configs.path>${project.build.testOutputDirectory}/testng.xml
+        </testng.configs.path>
+        <testng.suite.file>${testng.configs.path}/testng/hw4.xml</testng.suite.file>
         <assertj-core.version>3.20.2</assertj-core.version>
         <testng.version>7.4.0</testng.version>
         <selenium-java.version>3.141.59</selenium-java.version>
         <webdrivermanager.version>4.4.3</webdrivermanager.version>
+        <allure.version>2.13.2</allure.version>
+        <aspectj.version>1.9.5</aspectj.version>
     </properties>
 
     <dependencies>
@@ -51,6 +54,11 @@
             <artifactId>webdrivermanager</artifactId>
             <version>${webdrivermanager.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>${allure.version}</version>
         </dependency>
     </dependencies>
 
@@ -93,10 +101,20 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M5</version>
                 <configuration>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
                     <suiteXmlFiles>
-                        <suiteXmlFile>${maven-surefire-plugin.suiteXmlFile}</suiteXmlFile>
+                        <suiteXmlFile>${testng.suite.file}</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
@@ -105,43 +123,67 @@
         <profile>
             <id>add-sub-tests-start-profile</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+<!--                <activeByDefault>true</activeByDefault>-->
             </activation>
             <properties>
-                <maven-surefire-plugin.suiteXmlFile>${project.build.testOutputDirectory}/testng/hw1.firstAddSub.xml
-                </maven-surefire-plugin.suiteXmlFile>
+                <testng.suite.file>${project.build.testOutputDirectory}/testng/hw1.firstAddSub.xml
+                </testng.suite.file>
             </properties>
         </profile>
         <profile>
             <id>div-mult-tests-start-profile</id>
             <properties>
-                <maven-surefire-plugin.suiteXmlFile>${project.build.testOutputDirectory}/testng/hw1.secondDivMult.xml
-                </maven-surefire-plugin.suiteXmlFile>
+                <testng.suite.file>${project.build.testOutputDirectory}/testng/hw1.secondDivMult.xml
+                </testng.suite.file>
             </properties>
         </profile>
         <profile>
             <id>all-tests-start-profile</id>
             <properties>
-                <maven-surefire-plugin.suiteXmlFile>${project.build.testOutputDirectory}/testng/hw1.allTests.xml
-                </maven-surefire-plugin.suiteXmlFile>
+                <testng.suite.file>${project.build.testOutputDirectory}/testng/hw1.allTests.xml
+                </testng.suite.file>
             </properties>
         </profile>
         <profile>
             <id>web-page-test</id>
             <properties>
-                <maven-surefire-plugin.suiteXmlFile>
+                <testng.suite.file>
                     ${project.build.testOutputDirectory}/testng/hw2.testWebPage.xml
-                </maven-surefire-plugin.suiteXmlFile>
+                </testng.suite.file>
             </properties>
         </profile>
         <profile>
             <id>webpage-pageObject-test</id>
             <properties>
-                    <maven-surefire-plugin.suiteXmlFile>
+                    <testng.suite.file>
                         ${project.build.testOutputDirectory}/testng/hw3.testWebPage.xml
-                    </maven-surefire-plugin.suiteXmlFile>
+                    </testng.suite.file>
+            </properties>
+        </profile>
+        <profile>
+            <id>allure-hw4</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <testng.suite.file>
+                    ${project.build.testOutputDirectory}/testng/hw4.xml
+                </testng.suite.file>
             </properties>
         </profile>
     </profiles>
 
+    <reporting>
+        <excludeDefaults>true</excludeDefaults>
+        <plugins>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.10.0</version>
+                <configuration>
+                    <reportVersion>${allure.version}</reportVersion>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
 </project>
