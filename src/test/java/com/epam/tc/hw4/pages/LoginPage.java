@@ -34,7 +34,7 @@ public class LoginPage extends BasePage {
         webDriver.navigate().to(URL);
     }
 
-    @Step("assert home {title} and url")
+    @Step("assert home {title} and {url}")
     public void testBrowserTitle(String title, String url) {
         assertThat(webDriver.getCurrentUrl()).isEqualTo(url);
         assertThat(webDriver.getTitle()).isEqualTo(title);
@@ -65,7 +65,7 @@ public class LoginPage extends BasePage {
         loginButton.click();
     }
 
-    @Step("assert username is failed logged")
+    @Step("assert {username} is failed logged")
     public void testFailUsername(String username) {
         assertThat(usernameAfterAuthorization.getText()).isEqualTo(username);
     }

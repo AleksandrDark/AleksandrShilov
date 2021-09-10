@@ -57,13 +57,13 @@ public class DifferentElementsPage extends BasePage {
         radioSelen.click();
     }
 
-    @Step("Select in dropdown \"Yellow\"")
+    @Step("Select in dropdown {color}")
     public void selectDropdownYellow(String color) {
         Select colorY = new Select(dropdownYellow);
         colorY.selectByVisibleText(color);
     }
 
-    @Step("Assert that checkbox, radio button, radio button names are corresponding to selected")
+    @Step("Assert that checkbox, radio button, radio button {expectedContentInLogs} are corresponding to selected")
     public void checkLogs(List<String> expectedContentInLogs) {
         List<String> textLogs = logs.stream().map(WebElement::getText)
             .collect(Collectors.toList());

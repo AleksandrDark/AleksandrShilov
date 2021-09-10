@@ -30,7 +30,8 @@ public class HomePage extends BasePage {
         PageFactory.initElements(webDriver, this);
     }
 
-    @Step("assert that there are 4 images on the Index Page and they are displayed")
+    @Step("check that there are {countElementsOnHeaderSection} images on the Index Page "
+        + "and expected text are {expectedTextListElements}")
     public void testElementsOnHeaderSection(int countElementsOnHeaderSection, List<String> expectedTextListElements) {
         assertThat(elementsOnHeaderSection).hasSize(countElementsOnHeaderSection);
         List<String> actualTextListElements = elementsOnHeaderSection.stream().map(WebElement::getText)
@@ -38,12 +39,12 @@ public class HomePage extends BasePage {
         assertThat(actualTextListElements).isEqualTo(expectedTextListElements);
     }
 
-    @Step("assert that there are 4 images on the Index Page and they are displayed")
+    @Step("assert that there are {countImagesOnPage} images on the Index Page")
     public void testCountImagesOnPage(int countImagesOnPage) {
         assertThat(imagesOnPage).hasSize(countImagesOnPage);
     }
 
-    @Step("assert that there are 4 texts on the Index Page under icons and they have proper text")
+    @Step("assert that there are 4 texts on the Index Page under icons and they have {expectedTextUnderImages}")
     public void testTextElementsUnderImages(List<String> expectedTextUnderImages) {
         List<String> textListElementsUnderImages = textElementsUnderImages.stream().map(WebElement::getText)
             .collect(Collectors.toList());
@@ -55,12 +56,12 @@ public class HomePage extends BasePage {
         assertThat(frame.isDisplayed()).isTrue();
     }
 
-    @Step("switch to the iframe")
+    @Step("switch to the {idFrame}")
     public void switchToFrame(String idFrame) {
         webDriver.switchTo().frame(idFrame);
     }
 
-    @Step("check that there is “Frame Button” in the iframe")
+    @Step("check that there is button {buttonName} in the iframe")
     public void testFrameButton(String buttonAttribute, String buttonName) {
         String button = frameButton.getAttribute(buttonAttribute);
         assertThat(frameButton.isDisplayed()).isTrue();
@@ -72,7 +73,8 @@ public class HomePage extends BasePage {
         webDriver.switchTo().defaultContent();
     }
 
-    @Step("assert that there are 5 items in the Left Section are displayed and they have proper text")
+    @Step("check that there are {countSidebarMenuLeft} items in the Left Section "
+        + "which are displayed and they have {expectedTextOnSidebarMenuLeft}")
     public void testSidebarMenuLeft(int countSidebarMenuLeft, List<String> expectedTextOnSidebarMenuLeft) {
         assertThat(sidebarMenuLeft).hasSize(countSidebarMenuLeft);
         List<String> textOnSidebarMenuLeft = sidebarMenuLeft.stream().map(WebElement::getText)
