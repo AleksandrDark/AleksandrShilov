@@ -8,7 +8,7 @@ public class DataProviderPage {
     @DataProvider
     public static Object[][] getTextPages() {
         return new Object[][]{
-            {new DataProviderHelper("Home Page", "ROMAN IOVLEV", "frame",
+            {new DataProviderUtil("Home Page", "ROMAN IOVLEV", "frame",
                 "value", "Frame Button", "Yellow",
                 Arrays.asList("HOME", "CONTACT FORM", "SERVICE", "METALS & COLORS"),
                 Arrays.asList("To include good practices\nand ideas from successful\nEPAM project",

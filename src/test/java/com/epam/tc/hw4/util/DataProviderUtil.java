@@ -2,7 +2,7 @@ package com.epam.tc.hw4.util;
 
 import java.util.List;
 
-public class DataProviderHelper {
+public class DataProviderUtil {
     private final String title;
     private final String username;
     private final String idFrame;
@@ -17,7 +17,7 @@ public class DataProviderHelper {
     private final int countImagesOnPage;
     private final int countElementsOnHeaderSection;
 
-    public DataProviderHelper(
+    public DataProviderUtil(
         String title, String username, String idFrame, String buttonAttribute, String buttonName, String yellow,
         List<String> expectedTextListElements, List<String> expectedTextUnderImages,
         List<String> expectedTextOnSidebarMenuLeft, List<String> expectedContentInLogs,
