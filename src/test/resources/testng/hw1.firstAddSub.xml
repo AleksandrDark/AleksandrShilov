@@ -1,4 +1,3 @@
-
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 <suite name="TestSuiteCalculatorAddSub" >
     <test name="AddSubTest" >
@@ -12,5 +11,4 @@
             <class name="com.epam.tc.hw1.CalculatorSubtractTest"/>
         </classes>
     </test>
-
 </suite>
