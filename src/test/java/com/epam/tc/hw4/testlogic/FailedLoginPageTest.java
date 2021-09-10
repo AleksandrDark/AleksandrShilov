@@ -21,7 +21,7 @@ public class FailedLoginPageTest extends BasePage {
         //1. open test site url
         loginPage.openSite();
         //2. assert browser title
-        loginPage.testBrowserTitle(dataHelper.getTitle());
+        loginPage.testBrowserTitle(dataHelper.getTitle(), URL);
         //3. perform failed login
         loginPage.performFailedLogin();
         //4. assert incorrect user

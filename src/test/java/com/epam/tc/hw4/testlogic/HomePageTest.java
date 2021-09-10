@@ -26,7 +26,7 @@ public class HomePageTest extends BasePage {
         //1. open test site url
         loginPage.openSite();
         //2. assert browser title
-        loginPage.testBrowserTitle(dataHelper.getTitle());
+        loginPage.testBrowserTitle(dataHelper.getTitle(), URL);
         //3. perform login
         loginPage.performLogin();
         //4. assert username is logged

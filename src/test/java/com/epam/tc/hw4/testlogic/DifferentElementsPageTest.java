@@ -22,7 +22,7 @@ public class DifferentElementsPageTest extends BasePage {
         //1. Open test site by URL
         loginPage.openSite();
         //2. Assert Browser title "Home Page"
-        loginPage.testBrowserTitle(providerHelper.getTitle());
+        loginPage.testBrowserTitle(providerHelper.getTitle(), URL);
         //3. Perform login
         loginPage.performLogin();
         //4. Assert User name in the left-top side of screen is "ROMAN IOVLEV"
