@@ -2,7 +2,6 @@ package com.epam.tc.hw4.pages;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.epam.tc.hw4.util.DataProviderHelper;
 import io.qameta.allure.Step;
 import java.util.List;
 import java.util.stream.Collectors;
