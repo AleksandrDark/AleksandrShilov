@@ -70,7 +70,7 @@ public class DataProviderHelper {
         return idFrame;
     }
 
-    public String getYellow() {
+    public String getColor() {
         return yellow;
     }
 

@@ -36,9 +36,9 @@ public class LoginPage extends BasePage {
     }
 
     @Step("assert home title and url")
-    public void testBrowserTitle(DataProviderHelper dataHelper) {
+    public void testBrowserTitle(String title) {
         assertThat(webDriver.getCurrentUrl()).isEqualTo(URL);
-        assertThat(webDriver.getTitle()).isEqualTo(dataHelper.getTitle());
+        assertThat(webDriver.getTitle()).isEqualTo(title);
     }
 
     @Step("perform login")
@@ -52,8 +52,8 @@ public class LoginPage extends BasePage {
     }
 
     @Step("assert username is logged")
-    public void testUsername(DataProviderHelper dataHelper) {
-        assertThat(usernameAfterAuthorization.getText()).isEqualTo(dataHelper.getUsername());
+    public void testUsername(String username) {
+        assertThat(usernameAfterAuthorization.getText()).isEqualTo(username);
     }
 
     @Step("perform failed Login")
@@ -67,7 +67,7 @@ public class LoginPage extends BasePage {
     }
 
     @Step("assert username is failed logged")
-    public void testFailUsername(DataProviderHelper dataHelper) {
-        assertThat(usernameAfterAuthorization.getText()).isEqualTo(dataHelper.getUsername());
+    public void testFailUsername(String username) {
+        assertThat(usernameAfterAuthorization.getText()).isEqualTo(username);
     }
 }

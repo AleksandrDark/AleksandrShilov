@@ -32,23 +32,23 @@ public class HomePage extends BasePage {
     }
 
     @Step("assert that there are 4 images on the Index Page and they are displayed")
-    public void testElementsOnHeaderSection(DataProviderHelper dataHelper) {
-        assertThat(elementsOnHeaderSection).hasSize(dataHelper.getCountElementsOnHeaderSection());
+    public void testElementsOnHeaderSection(int countElementsOnHeaderSection, List<String> expectedTextListElements) {
+        assertThat(elementsOnHeaderSection).hasSize(countElementsOnHeaderSection);
         List<String> actualTextListElements = elementsOnHeaderSection.stream().map(WebElement::getText)
             .collect(Collectors.toList());
-        assertThat(actualTextListElements).isEqualTo(dataHelper.getExpectedTextListElements());
+        assertThat(actualTextListElements).isEqualTo(expectedTextListElements);
     }
 
     @Step("assert that there are 4 images on the Index Page and they are displayed")
-    public void testCountImagesOnPage(DataProviderHelper dataHelper) {
-        assertThat(imagesOnPage).hasSize(dataHelper.getCountImagesOnPage());
+    public void testCountImagesOnPage(int countImagesOnPage) {
+        assertThat(imagesOnPage).hasSize(countImagesOnPage);
     }
 
     @Step("assert that there are 4 texts on the Index Page under icons and they have proper text")
-    public void testTextElementsUnderImages(DataProviderHelper dataHelper) {
+    public void testTextElementsUnderImages(List<String> expectedTextUnderImages) {
         List<String> textListElementsUnderImages = textElementsUnderImages.stream().map(WebElement::getText)
             .collect(Collectors.toList());
-        assertThat(textListElementsUnderImages).isEqualTo(dataHelper.getExpectedTextUnderImages());
+        assertThat(textListElementsUnderImages).isEqualTo(expectedTextUnderImages);
     }
 
     @Step("assert that there is the iframe with “Frame Button” exist")
@@ -57,15 +57,15 @@ public class HomePage extends BasePage {
     }
 
     @Step("switch to the iframe")
-    public void switchToFrame(DataProviderHelper dataHelper) {
-        webDriver.switchTo().frame(dataHelper.getIdFrame());
+    public void switchToFrame(String idFrame) {
+        webDriver.switchTo().frame(idFrame);
     }
 
     @Step("check that there is “Frame Button” in the iframe")
-    public void testFrameButton(DataProviderHelper dataHelper) {
-        String button = frameButton.getAttribute(dataHelper.getButtonAttribute());
+    public void testFrameButton(String buttonAttribute, String buttonName) {
+        String button = frameButton.getAttribute(buttonAttribute);
         assertThat(frameButton.isDisplayed()).isTrue();
-        assertThat(button).isEqualTo(dataHelper.getButtonName());
+        assertThat(button).isEqualTo(buttonName);
     }
 
     @Step("switch to original window back")
@@ -74,10 +74,10 @@ public class HomePage extends BasePage {
     }
 
     @Step("assert that there are 5 items in the Left Section are displayed and they have proper text")
-    public void testSidebarMenuLeft(DataProviderHelper dataHelper) {
-        assertThat(sidebarMenuLeft).hasSize(dataHelper.getCountSidebarMenuLeft());
+    public void testSidebarMenuLeft(int countSidebarMenuLeft, List<String> expectedTextOnSidebarMenuLeft) {
+        assertThat(sidebarMenuLeft).hasSize(countSidebarMenuLeft);
         List<String> textOnSidebarMenuLeft = sidebarMenuLeft.stream().map(WebElement::getText)
             .collect(Collectors.toList());
-        assertThat(textOnSidebarMenuLeft).isEqualTo(dataHelper.getExpectedTextOnSidebarMenuLeft());
+        assertThat(textOnSidebarMenuLeft).isEqualTo(expectedTextOnSidebarMenuLeft);
     }
 }

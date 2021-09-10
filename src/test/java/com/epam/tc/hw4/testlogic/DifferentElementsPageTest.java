@@ -22,11 +22,11 @@ public class DifferentElementsPageTest extends BasePage {
         //1. Open test site by URL
         loginPage.openSite();
         //2. Assert Browser title "Home Page"
-        loginPage.testBrowserTitle(providerHelper);
+        loginPage.testBrowserTitle(providerHelper.getTitle());
         //3. Perform login
         loginPage.performLogin();
         //4. Assert User name in the left-top side of screen is "ROMAN IOVLEV"
-        loginPage.testUsername(providerHelper);
+        loginPage.testUsername(providerHelper.getUsername());
         //5. Open through the header menu Service -> Different Elements Page
         DifferentElementsPage differentElementsPage = new DifferentElementsPage(webDriver);
         differentElementsPage.openServiceMenu();
@@ -37,8 +37,8 @@ public class DifferentElementsPageTest extends BasePage {
         //7. Select radio "Selen"
         differentElementsPage.selectRadioSelen();
         //8. Select in dropdown "Yellow"
-        differentElementsPage.selectDropdownYellow(providerHelper);
+        differentElementsPage.selectDropdownYellow(providerHelper.getColor());
         //9. Assert that checkbox, radio button, radio button names are corresponding to selected
-        differentElementsPage.checkLogs(providerHelper);
+        differentElementsPage.checkLogs(providerHelper.getExpectedContentInLogs());
     }
 }

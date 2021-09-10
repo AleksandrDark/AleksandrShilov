@@ -26,27 +26,29 @@ public class HomePageTest extends BasePage {
         //1. open test site url
         loginPage.openSite();
         //2. assert browser title
-        loginPage.testBrowserTitle(dataHelper);
+        loginPage.testBrowserTitle(dataHelper.getTitle());
         //3. perform login
         loginPage.performLogin();
         //4. assert username is logged
-        loginPage.testUsername(dataHelper);
+        loginPage.testUsername(dataHelper.getUsername());
         //5. assert that there are 4 items on the header section are displayed and they have proper texts
         HomePage homePage = new HomePage(webDriver);
-        homePage.testElementsOnHeaderSection(dataHelper);
+        homePage.testElementsOnHeaderSection(dataHelper.getCountElementsOnHeaderSection(),
+            dataHelper.getExpectedTextListElements());
         //6. assert that there are 4 images on the Index Page and they are displayed
-        homePage.testCountImagesOnPage(dataHelper);
+        homePage.testCountImagesOnPage(dataHelper.getCountImagesOnPage());
         //7. assert that there are 4 texts on the Index Page under icons and they have proper text
-        homePage.testTextElementsUnderImages(dataHelper);
+        homePage.testTextElementsUnderImages(dataHelper.getExpectedTextUnderImages());
         //final String windowHandler = webDriver.getWindowHandle();
         //8. assert that there is the iframe with “Frame Button” exist
         homePage.testIsFrame();
         //9. switch to the iframe and check that there is “Frame Button” in the iframe
-        homePage.switchToFrame(dataHelper);
-        homePage.testFrameButton(dataHelper);
+        homePage.switchToFrame(dataHelper.getIdFrame());
+        homePage.testFrameButton(dataHelper.getButtonAttribute(), dataHelper.getButtonName());
         //10. switch to original window back
         homePage.switchToHomePage();
         //11. assert that there are 5 items in the Left Section are displayed and they have proper text
-        homePage.testSidebarMenuLeft(dataHelper);
+        homePage.testSidebarMenuLeft(dataHelper.getCountSidebarMenuLeft(),
+            dataHelper.getExpectedTextOnSidebarMenuLeft());
     }
 }

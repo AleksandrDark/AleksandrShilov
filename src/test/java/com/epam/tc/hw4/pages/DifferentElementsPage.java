@@ -59,16 +59,16 @@ public class DifferentElementsPage extends BasePage {
     }
 
     @Step("Select in dropdown \"Yellow\"")
-    public void selectDropdownYellow(DataProviderHelper providerHelper) {
-        Select color = new Select(dropdownYellow);
-        color.selectByVisibleText(providerHelper.getYellow());
+    public void selectDropdownYellow(String color) {
+        Select colorY = new Select(dropdownYellow);
+        colorY.selectByVisibleText(color);
     }
 
     @Step("Assert that checkbox, radio button, radio button names are corresponding to selected")
-    public void checkLogs(DataProviderHelper providerHelper) {
+    public void checkLogs(List<String> expectedContentInLogs) {
         List<String> textLogs = logs.stream().map(WebElement::getText)
             .collect(Collectors.toList());
-        assertThat(textLogs).asString().containsSubsequence(providerHelper.getExpectedContentInLogs());
+        assertThat(textLogs).asString().containsSubsequence(expectedContentInLogs);
     }
 
 }
