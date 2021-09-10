@@ -1,23 +1,23 @@
-package com.epam.tc.hw3.util;
+package com.epam.tc.hw4.util;
 
 import java.util.List;
 
-public class DataProviderHelper {
-    private String title;
-    private String username;
-    private String idFrame;
-    private String buttonAttribute;
-    private String buttonName;
-    private List<String> expectedTextListElements;
-    private List<String> expectedTextUnderImages;
-    private List<String> expectedTextOnSidebarMenuLeft;
-    private String yellow;
-    private List<String> expectedContentInLogs;
-    private int countSidebarMenuLeft;
-    private int countImagesOnPage;
-    private int countElementsOnHeaderSection;
+public class DataProviderUtil {
+    private final String title;
+    private final String username;
+    private final String idFrame;
+    private final String buttonAttribute;
+    private final String buttonName;
+    private final List<String> expectedTextListElements;
+    private final List<String> expectedTextUnderImages;
+    private final List<String> expectedTextOnSidebarMenuLeft;
+    private final String yellow;
+    private final List<String> expectedContentInLogs;
+    private final int countSidebarMenuLeft;
+    private final int countImagesOnPage;
+    private final int countElementsOnHeaderSection;
 
-    public DataProviderHelper(
+    public DataProviderUtil(
         String title, String username, String idFrame, String buttonAttribute, String buttonName, String yellow,
         List<String> expectedTextListElements, List<String> expectedTextUnderImages,
         List<String> expectedTextOnSidebarMenuLeft, List<String> expectedContentInLogs,
@@ -70,7 +70,7 @@ public class DataProviderHelper {
         return idFrame;
     }
 
-    public String getYellow() {
+    public String getColor() {
         return yellow;
     }
 

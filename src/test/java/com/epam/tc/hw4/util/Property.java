@@ -1,4 +1,4 @@
-package com.epam.tc.hw3.util;
+package com.epam.tc.hw4.util;
 
 import java.io.FileInputStream;
 import java.io.IOException;
