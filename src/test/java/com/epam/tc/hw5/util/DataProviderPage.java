@@ -1,6 +1,6 @@
 package com.epam.tc.hw5.util;
 
-import com.epam.tc.hw4.util.DataProviderHelper;
+import com.epam.tc.hw5.util.DataProviderUtil;
 import java.util.Arrays;
 import org.testng.annotations.DataProvider;
 
@@ -9,7 +9,7 @@ public class DataProviderPage {
     @DataProvider
     public static Object[][] getTextPages() {
         return new Object[][]{
-            {new DataProviderHelper("Home Page", "ROMAN IOVLEV", "frame",
+            {new DataProviderUtil("Home Page", "ROMAN IOVLEV", "frame",
                 "value", "Frame Button", "Yellow",
                 Arrays.asList("HOME", "CONTACT FORM", "SERVICE", "METALS & COLORS"),
                 Arrays.asList("To include good practices\nand ideas from successful\nEPAM project",

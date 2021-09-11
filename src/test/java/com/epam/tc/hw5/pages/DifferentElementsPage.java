@@ -2,8 +2,6 @@ package com.epam.tc.hw5.pages;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.epam.tc.hw5.util.DataProviderHelper;
-import io.qameta.allure.Step;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.openqa.selenium.WebDriver;
@@ -13,8 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 public class DifferentElementsPage extends BasePage {
-    @FindBy(css = "li.menu-title")
-    private WebElement headerMenu;
+
     @FindBy(linkText = "Different elements")
     private WebElement differentElement;
     @FindBy(xpath = "//label[text()[contains(.,'Water')]]/input")
@@ -33,42 +30,31 @@ public class DifferentElementsPage extends BasePage {
         PageFactory.initElements(webDriver, this);
     }
 
-    @Step("Open the header menu Service")
-    public void openServiceMenu() {
-        headerMenu.click();
-    }
-
-    @Step("Open through the header menu Service -> Different Elements Page")
     public void openDifferentElement() {
         differentElement.click();
     }
 
-    @Step("Select checkboxes \"Water\"")
     public void selectCheckBoxWater() {
         checkBoxWater.click();
     }
 
-    @Step("Select checkboxes \"Wind\"")
     public void selectCheckBoxWind() {
         checkBoxWind.click();
     }
 
-    @Step("Select radio \"Selen\"")
     public void selectRadioSelen() {
         radioSelen.click();
     }
 
-    @Step("Select in dropdown \"Yellow\"")
-    public void selectDropdownYellow(DataProviderHelper providerHelper) {
-        Select color = new Select(dropdownYellow);
-        color.selectByVisibleText(providerHelper.getYellow());
+    public void selectDropdownYellow(String color) {
+        Select colorY = new Select(dropdownYellow);
+        colorY.selectByVisibleText(color);
     }
 
-    @Step("Assert that checkbox, radio button, radio button names are corresponding to selected")
-    public void checkLogs(DataProviderHelper providerHelper) {
+    public void checkLogs(List<String> expectedContentInLogs) {
         List<String> textLogs = logs.stream().map(WebElement::getText)
             .collect(Collectors.toList());
-        assertThat(textLogs).asString().containsSubsequence(providerHelper.getExpectedContentInLogs());
+        assertThat(textLogs).asString().containsSubsequence(expectedContentInLogs);
     }
 
 }
