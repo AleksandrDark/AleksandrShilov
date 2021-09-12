@@ -1,7 +1,5 @@
 package com.epam.tc.hw5.pages;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.util.List;
 import java.util.stream.Collectors;
 import org.openqa.selenium.WebDriver;
@@ -51,10 +49,9 @@ public class DifferentElementsPage extends BasePage {
         colorY.selectByVisibleText(color);
     }
 
-    public void checkLogs(List<String> expectedContentInLogs) {
-        List<String> textLogs = logs.stream().map(WebElement::getText)
+    public List<String> getLogs() {
+        return logs.stream().map(WebElement::getText)
             .collect(Collectors.toList());
-        assertThat(textLogs).asString().containsSubsequence(expectedContentInLogs);
     }
 
 }

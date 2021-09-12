@@ -172,12 +172,20 @@
         </profile>
         <profile>
             <id>allure-hw4</id>
+            <properties>
+                <testng.suite.file>
+                    ${project.build.testOutputDirectory}/testng/hw4.xml
+                </testng.suite.file>
+            </properties>
+        </profile>
+        <profile>
+            <id>cucumber-hw5</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
                 <testng.suite.file>
-                    ${project.build.testOutputDirectory}/testng/hw4.xml
+                    ${project.build.testOutputDirectory}/testng/hw5.xml
                 </testng.suite.file>
             </properties>
         </profile>

@@ -14,7 +14,7 @@ public class AssertionStep extends AbstractStep {
     @Then("Log rows are displayed and radio button,checkbox, dropdown names "
         + "and their status are corresponding to selected on different Page:")
     public void checkTextInLogs(List<String> differentPage) {
-        differentElementsPage.checkLogs(differentPage);
+        assertThat(differentElementsPage.getLogs()).asString().containsSubsequence(differentPage);
     }
 
     @Then("{string} page should be opened")
