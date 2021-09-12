@@ -35,4 +35,9 @@ public class ActionStep extends AbstractStep {
     public void selectDropdown(String color) {
         differentElementsPage.selectDropdownYellow(color);
     }
+
+    @When("I select 'vip' checkbox for \"Sergey Ivan\"")
+    public void selectVipButtonForSergeyIvan() {
+        userTable.clickButtonVipInCheckboxSergeyIvan();
+    }
 }

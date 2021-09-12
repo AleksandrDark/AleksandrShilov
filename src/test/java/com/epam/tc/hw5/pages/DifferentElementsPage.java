@@ -26,7 +26,7 @@ public class DifferentElementsPage extends BasePage {
     private List<WebElement> logs;
 
     public DifferentElementsPage(WebDriver webDriver) {
-        this.webDriver = webDriver;
+        super(webDriver);
         PageFactory.initElements(webDriver, this);
     }
 

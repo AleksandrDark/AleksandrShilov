@@ -15,7 +15,4 @@ public class GivenClass extends AbstractStep {
         loginPage.performLogin();
     }
 
-
-
-
 }
