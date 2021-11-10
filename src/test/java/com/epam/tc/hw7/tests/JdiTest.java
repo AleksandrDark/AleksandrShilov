@@ -1,11 +1,11 @@
 package com.epam.tc.hw7.tests;
 
+import static com.epam.tc.hw7.entities.User.ROMAN;
 import static com.epam.tc.hw7.site.JdiTestSite.headerMenu;
 import static com.epam.tc.hw7.site.JdiTestSite.metalsAndColorsPage;
 import static com.epam.tc.hw7.site.pages.HomePage.userName;
 import static com.epam.tc.hw7.site.pages.MetalsAndColorsPage.getResult;
 import static com.epam.tc.hw7.site.pages.MetalsAndColorsPage.metalsAndColorsForm;
-import static com.epam.tc.hw7.util.JdiDataProvider.EXPECTED_USERNAME;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.epam.tc.hw7.entities.MetalAndColorEntity;
@@ -18,7 +18,7 @@ public class JdiTest implements InitTest {
     @Test
     public void testLogin() {
         Assertions.assertThat(userName.getText()).as("User name is wrong")
-            .isEqualTo(EXPECTED_USERNAME);
+            .isEqualTo(ROMAN.getExpectedUserName());
     }
 
     @Test(dataProvider = "testDataSet", dataProviderClass = JdiDataProvider.class)

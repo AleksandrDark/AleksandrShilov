@@ -11,7 +11,6 @@ import java.util.Map;
 import org.testng.annotations.DataProvider;
 
 public class JdiDataProvider {
-    public static final String EXPECTED_USERNAME = "ROMAN IOVLEV";
     public static final String PATH = "src/test/resources/testdata/JDI_ex8_metalsColorsDataSet.json";
 
     @DataProvider(name = "testDataSet")
