@@ -179,13 +179,13 @@
             </properties>
         </profile>
         <profile>
-            <id>cucumber-hw5</id>
+            <id>hw6</id>     
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
                 <testng.suite.file>
-                    ${project.build.testOutputDirectory}/testng/hw5.xml
+                    ${project.build.testOutputDirectory}/testng/hw6.xml
                 </testng.suite.file>
             </properties>
         </profile>
