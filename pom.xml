@@ -22,6 +22,7 @@
         <webdrivermanager.version>4.4.3</webdrivermanager.version>
         <allure.version>2.13.2</allure.version>
         <aspectj.version>1.9.5</aspectj.version>
+        <cucumber.version>6.11.0</cucumber.version>
     </properties>
 
     <dependencies>
@@ -60,8 +61,17 @@
             <artifactId>allure-testng</artifactId>
             <version>${allure.version}</version>
         </dependency>
+    <dependency>
+        <groupId>io.cucumber</groupId>
+        <artifactId>cucumber-java</artifactId>
+        <version>${cucumber.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>io.cucumber</groupId>
+        <artifactId>cucumber-testng</artifactId>
+        <version>${cucumber.version}</version>
+    </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -169,7 +179,7 @@
             </properties>
         </profile>
         <profile>
-            <id>hw6</id>
+            <id>hw6</id>     
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
