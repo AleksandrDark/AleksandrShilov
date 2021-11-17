@@ -1,8 +1,0 @@
-<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="testHW7">
-    <test name="testHW7">
-        <packages>
-            <package name="com.epam.tc.hw7.tests"/>
-        </packages>
-    </test>
-</suite>
